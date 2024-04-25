@@ -5,6 +5,7 @@ import cookieParser from "cookie-parser";
 import fileUpload from "express-fileupload";
 import { dbConnection } from "./database/db.js";
 import residentRouter from "./routes/resident.js";
+import adminRouter from "./routes/admin.js";
 
 const app = express();
 config({ path: "./config/config.env" });
@@ -35,5 +36,6 @@ dbConnection();
 // -------------------------- Function routes -------------------------------
 
 app.use("/api/v1/resident", residentRouter);
+app.use("/api/v1/admin", adminRouter);
 
 export default app;
