@@ -37,10 +37,10 @@ const residentSchema = mongoose.Schema(
   { timestamps: true }
 );
 
-residentSchema.methods.generateToken = function () {
-  return jwt.sign({ id: this._id }, process.env.JWT_SECRET_KEY, {
-    expiresIn: process.env.JWT_EXPIRES,
-  });
-};
+// residentSchema.methods.generateToken = function () {
+//   return jwt.sign({ id: this._id }, process.env.JWT_SECRET_KEY, {
+//     expiresIn: process.env.JWT_EXPIRES,
+//   });
+// };
 
 export const residentModel = mongoose.model("Residents", residentSchema);
