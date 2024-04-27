@@ -104,7 +104,7 @@ export const deleteResident = async (req, res) => {
 
     return res.status(200).send({
       success: true,
-      message: "Single resident deleted",
+      message: "Resident deleted",
       resident,
     });
   } catch (err) {
