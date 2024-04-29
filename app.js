@@ -29,6 +29,12 @@ app.use(
   })
 );
 
+// default route
+
+app.get("/", async (req, res) => {
+  res.json({ name: "hello" });
+});
+
 // -------------------------- Calling DB CONNECTION ----------------------------------
 
 dbConnection();
