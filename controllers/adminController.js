@@ -3,6 +3,8 @@ import validator from "validator";
 import bcrypt from "bcryptjs";
 import { adminModel } from "../models/adminModel.js";
 import jwt from "jsonwebtoken";
+
+// admin adding
 export const adminController = async (req, res) => {
   const { FullName, Email, Password, Phone } = req.body;
 
@@ -31,6 +33,8 @@ export const adminController = async (req, res) => {
     admin,
   });
 };
+
+// Admin login
 
 export const adminLogin = async (req, res) => {
   const { Email, Password } = req.body;
@@ -64,5 +68,27 @@ export const adminLogin = async (req, res) => {
       message: "Admin loggedin succesfully",
       token: token,
     });
+  }
+};
+
+// getting admins
+
+export const getAdmin = async (req, res) => {
+  try {
+    const admins = await adminModel.find();
+    if (!admins) {
+      return res.status(400).send({
+        success: false,
+        message: "No admin found",
+      });
+    } else {
+      return res.status(200).send({
+        success: true,
+        message: "All admin list",
+        admins,
+      });
+    }
+  } catch (err) {
+    console.log(err);
   }
 };
