@@ -157,3 +157,26 @@ export const updateResident = async (req, res) => {
     console.log(err);
   }
 };
+
+// ---------------- search API ------------------------
+
+// export const searchResident = async (req, res) => {
+//   try {
+//     const page = parseInt(req.query.page) - 1 || 0;
+//     const limit = parseInt(req.query.limit) || 10;
+//     const search = req.query.search || "";
+//     const residents = await residentModel
+//       .find({ name: { $regex: search, $option: "i" } })
+//       .skip(page * limit)
+//       .limit(limit);
+
+//     return res.status(200).json({
+//       success: true,
+//       message: "Searched queries",
+//       residents,
+//     });
+//   } catch (err) {
+//     console.log(err);
+//     return res.status(500).json({ Message: "Internal server error" });
+//   }
+// };
