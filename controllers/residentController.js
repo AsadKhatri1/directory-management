@@ -5,8 +5,16 @@ import validator from "validator";
 
 // ------------------------------- creating resident -----------------------------------------
 export const residentController = async (req, res, next) => {
-  const { FullName, Email, Phone, HouseNumber, CNIC, role, resAvatar } =
-    req.body;
+  const {
+    FullName,
+    Email,
+    Phone,
+    HouseNumber,
+    CNIC,
+    role,
+    resAvatar,
+    vehicles,
+  } = req.body;
 
   if (!FullName || !Email || !Phone || !HouseNumber || !CNIC) {
     return res.status(400).json({
@@ -43,6 +51,7 @@ export const residentController = async (req, res, next) => {
     CNIC,
     role,
     resAvatar,
+    vehicles,
   });
 
   await newResident.save();

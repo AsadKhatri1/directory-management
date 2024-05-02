@@ -1,6 +1,15 @@
 import mongoose from "mongoose";
 import validator from "validator";
-import jwt from "jsonwebtoken";
+// import jwt from "jsonwebtoken";
+
+const vehicleSchema = mongoose.Schema({
+  type: String,
+  make: String,
+  model: String,
+  year: Number,
+  registrationNumber: String,
+});
+
 const residentSchema = mongoose.Schema(
   {
     FullName: {
@@ -33,14 +42,9 @@ const residentSchema = mongoose.Schema(
       public_id: String,
       url: String,
     },
+    vehicles: [vehicleSchema],
   },
   { timestamps: true }
 );
-
-// residentSchema.methods.generateToken = function () {
-//   return jwt.sign({ id: this._id }, process.env.JWT_SECRET_KEY, {
-//     expiresIn: process.env.JWT_EXPIRES,
-//   });
-// };
 
 export const residentModel = mongoose.model("Residents", residentSchema);
