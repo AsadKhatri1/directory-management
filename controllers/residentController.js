@@ -189,3 +189,31 @@ export const updateResident = async (req, res) => {
 //     return res.status(500).json({ Message: "Internal server error" });
 //   }
 // };
+
+export const slipCreate = async (req, res) => {
+  try {
+    const { residentId } = req.params;
+    const resident = await residentModel.findById(residentId);
+    // const resident = await residentModel.findById(residentId);
+    // Logic to generate the fee slip
+    // Calculate total fee based on the fixed monthly fee and the number of months
+    const numberOfMonths = req.body.numberOfMonths;
+    const monthlyFee = 2000;
+    const totalFee = numberOfMonths * monthlyFee;
+    // Save the fee slip to the database or perform any other necessary actions
+    // Return success message or fee slip data
+
+    res.status(200).json({
+      success: true,
+      message: "Fee slip generated successfully",
+      resident,
+      totalFee,
+      numberOfMonths,
+    });
+  } catch (error) {
+    console.error("Error generating fee slip:", error);
+    res
+      .status(500)
+      .json({ success: false, message: "Failed to generate fee slip" });
+  }
+};
