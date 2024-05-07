@@ -33,7 +33,7 @@ app.use(
 // default route
 
 app.get("/", async (req, res) => {
-  res.json({ name: "hello" });
+  res.json({ name: "hell1" });
 });
 
 // -------------------------- Calling DB CONNECTION ----------------------------------
