@@ -22,10 +22,8 @@ config({ path: "./config/config.env" });
 
 app.use(
   cors({
-    origin: [
-      "https://directory--sigma.vercel.app",
-      "https://directory--sigma.vercel.app/dashboard/newResident",
-    ],
+    origin: "https://directory--sigma.vercel.app",
+
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
     preflightContinue: false,
     optionsSuccessStatus: 204,
