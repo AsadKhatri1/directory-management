@@ -12,11 +12,11 @@ export const residentController = async (req, res, next) => {
     HouseNumber,
     CNIC,
     role,
-    resAvatar,
+    relatives,
     vehicles,
   } = req.body;
 
-  if (!FullName || !Email || !Phone || !HouseNumber || !CNIC) {
+  if (!FullName || !Email || !Phone || !HouseNumber || !CNIC || !relatives) {
     return res.status(400).json({
       success: false,
       message: "Please enter all fields of form to continue",
@@ -43,7 +43,7 @@ export const residentController = async (req, res, next) => {
     });
   }
 
-  const newResident = new residentModel({
+  const newResident = await new residentModel({
     FullName,
     Email,
     Phone,
@@ -52,6 +52,7 @@ export const residentController = async (req, res, next) => {
     role,
     resAvatar,
     vehicles,
+    relatives,
   });
 
   await newResident.save();

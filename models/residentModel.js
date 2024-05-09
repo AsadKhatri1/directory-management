@@ -9,6 +9,10 @@ const vehicleSchema = mongoose.Schema({
   year: Number,
   registrationNumber: String,
 });
+const familyMemberSchema = mongoose.Schema({
+  name: String,
+  relation: String,
+});
 
 const residentSchema = mongoose.Schema(
   {
@@ -42,6 +46,7 @@ const residentSchema = mongoose.Schema(
       public_id: String,
       url: String,
     },
+    relatives: [familyMemberSchema], // New field for family members
     vehicles: [vehicleSchema],
   },
   { timestamps: true }
