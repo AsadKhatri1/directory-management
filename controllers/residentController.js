@@ -12,7 +12,7 @@ export const residentController = async (req, res, next) => {
     HouseNumber,
     CNIC,
     role,
-    relatives,
+    // relatives,
     vehicles,
   } = req.body;
 
@@ -52,7 +52,7 @@ export const residentController = async (req, res, next) => {
     role,
     resAvatar,
     vehicles,
-    relatives,
+    // relatives,
   });
 
   await newResident.save();
