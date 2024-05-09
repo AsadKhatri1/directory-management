@@ -25,7 +25,7 @@ app.use(
     origin: "https://directory--sigma.vercel.app",
 
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-    preflightContinue: false,
+    // preflightContinue: false,
     optionsSuccessStatus: 204,
   })
 );
