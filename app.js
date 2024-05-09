@@ -18,12 +18,17 @@ config({ path: "./config/config.env" });
 //     credentials: true,
 //   })
 // );
+// Allow requests from specific origins
+const allowedOrigins = ["https://directory--sigma.vercel.app"];
 app.use(
   cors({
-    origin: "https://directory--sigma.vercel.app/",
-    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-    preflightContinue: false,
-    optionsSuccessStatus: 204,
+    origin: function (origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
   })
 );
 
