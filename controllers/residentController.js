@@ -50,7 +50,7 @@ export const residentController = async (req, res, next) => {
     HouseNumber,
     CNIC,
     role,
-    resAvatar,
+
     vehicles,
     relatives,
   });
