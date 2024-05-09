@@ -20,12 +20,14 @@ config({ path: "./config/config.env" });
 // );
 // Allow requests from specific origins
 
-app.use({
-  origin: "https://directory--sigma.vercel.app",
-  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-  preflightContinue: false,
-  optionsSuccessStatus: 204,
-});
+app.use(
+  cors({
+    origin: "https://directory--sigma.vercel.app",
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    preflightContinue: false,
+    optionsSuccessStatus: 204,
+  })
+);
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
