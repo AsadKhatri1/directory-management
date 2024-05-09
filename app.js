@@ -18,7 +18,14 @@ config({ path: "./config/config.env" });
 //     credentials: true,
 //   })
 // );
-app.use(cors());
+app.use(
+  cors({
+    origin: "https://directory--sigma.vercel.app/",
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    preflightContinue: false,
+    optionsSuccessStatus: 204,
+  })
+);
 
 app.use(cookieParser());
 app.use(express.json());
