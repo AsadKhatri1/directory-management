@@ -43,7 +43,7 @@ export const residentController = async (req, res, next) => {
     });
   }
 
-  const newResident = await new residentModel({
+  const newResident = new residentModel({
     FullName,
     Email,
     Phone,
