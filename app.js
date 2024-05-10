@@ -22,7 +22,7 @@ config({ path: "./config/config.env" });
 
 app.use(
   cors({
-    origin: "https://directory--sigma.vercel.app",
+    origin: "*",
   })
 );
 app.use(cookieParser());
