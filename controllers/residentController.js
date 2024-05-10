@@ -12,6 +12,7 @@ export const residentController = async (req, res, next) => {
     HouseNumber,
     CNIC,
     role,
+    paid,
     relatives,
     vehicles,
   } = req.body;
@@ -50,7 +51,7 @@ export const residentController = async (req, res, next) => {
     HouseNumber,
     CNIC,
     role,
-
+    paid,
     vehicles,
     relatives,
   });

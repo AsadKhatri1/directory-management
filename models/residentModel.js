@@ -46,6 +46,10 @@ const residentSchema = mongoose.Schema(
       public_id: String,
       url: String,
     },
+    paid: {
+      type: Boolean,
+      default: false,
+    },
     relatives: [familyMemberSchema], // New field for family members
     vehicles: [vehicleSchema],
   },
