@@ -38,6 +38,33 @@ const residentSchema = mongoose.Schema(
       type: String,
       required: true,
     },
+    Profession: {
+      type: String,
+    },
+    Qualification: {
+      type: String,
+    },
+    DOB: {
+      type: Date,
+    },
+    NOCHolder: {
+      type: String,
+    },
+    bAddress: {
+      type: String,
+    },
+    officeTel: {
+      type: String,
+    },
+    NOCIssue: {
+      type: Date,
+    },
+    NOCNo: {
+      type: String,
+    },
+    NOCNo: {
+      type: String,
+    },
     role: {
       type: String,
       default: "0",
