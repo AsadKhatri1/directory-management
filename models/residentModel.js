@@ -16,6 +16,10 @@ const familyMemberSchema = mongoose.Schema({
 
 const residentSchema = mongoose.Schema(
   {
+    Photo: {
+      data: Buffer,
+      ContentType: String,
+    },
     FullName: {
       type: String,
       required: true,

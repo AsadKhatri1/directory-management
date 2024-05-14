@@ -2,6 +2,7 @@
 
 import { residentModel } from "../models/residentModel.js";
 import validator from "validator";
+import fs from "fs";
 
 // ------------------------------- creating resident -----------------------------------------
 export const residentController = async (req, res, next) => {
@@ -21,7 +22,8 @@ export const residentController = async (req, res, next) => {
     NOCNo,
     vehicles,
     relatives,
-  } = req.body;
+  } = req.fields;
+  const { Photo } = req.files;
 
   if (!FullName || !Email || !Phone || !HouseNumber || !CNIC) {
     return res.status(400).json({
@@ -51,22 +53,27 @@ export const residentController = async (req, res, next) => {
   }
 
   const newResident = new residentModel({
-    FullName,
-    Email,
-    Phone,
-    HouseNumber,
-    CNIC,
-    Profession,
-    Qualification,
-    DOB,
-    NOCHolder,
-    bAddress,
-    officeTel,
-    NOCIssue,
-    NOCNo,
-    vehicles,
-    relatives,
+    ...req.fields,
+    // FullName,
+    // Email,
+    // Phone,
+    // HouseNumber,
+    // CNIC,
+    // Profession,
+    // Qualification,
+    // DOB,
+    // NOCHolder,
+    // bAddress,
+    // officeTel,
+    // NOCIssue,
+    // NOCNo,
+    // vehicles,
+    // relatives,
   });
+  if (Photo) {
+    newResident.Photo.data = fs.readFileSync(Photo.path);
+    newResident.Photo.contentType = Photo.type;
+  }
 
   await newResident.save();
   return res.status(200).send({
@@ -75,6 +82,8 @@ export const residentController = async (req, res, next) => {
     newResident,
   });
 };
+
+// ----------------------------------- uploading image -------------------------
 
 //---------------------------------- getting all residents -----------------------
 export const allResidents = async (req, res) => {
