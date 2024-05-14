@@ -54,21 +54,6 @@ export const residentController = async (req, res, next) => {
 
   const newResident = new residentModel({
     ...req.fields,
-    // FullName,
-    // Email,
-    // Phone,
-    // HouseNumber,
-    // CNIC,
-    // Profession,
-    // Qualification,
-    // DOB,
-    // NOCHolder,
-    // bAddress,
-    // officeTel,
-    // NOCIssue,
-    // NOCNo,
-    // vehicles,
-    // relatives,
   });
   if (Photo) {
     newResident.Photo.data = fs.readFileSync(Photo.path);
@@ -80,10 +65,9 @@ export const residentController = async (req, res, next) => {
     success: true,
     message: "New resident registered succesfully",
     newResident,
+    Photo,
   });
 };
-
-// ----------------------------------- uploading image -------------------------
 
 //---------------------------------- getting all residents -----------------------
 export const allResidents = async (req, res) => {

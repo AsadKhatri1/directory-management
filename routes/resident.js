@@ -1,5 +1,5 @@
 import express from "express";
-import formidable from "express-formidable";
+const expressFormidable = require("express-formidable");
 import {
   allResidents,
   deleteResident,
@@ -7,12 +7,11 @@ import {
   residentController,
   updateResident,
   slipCreate,
-  imageUpload,
 } from "../controllers/residentController.js";
 
 const router = express.Router();
 
-router.post("/add", formidable(), residentController);
+router.post("/add", expressFormidable(), residentController);
 
 router.get("/getResidents", allResidents);
 router.get("/getResident/:id", resident);
