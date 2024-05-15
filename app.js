@@ -2,7 +2,7 @@ import express from "express";
 import { config } from "dotenv";
 import cors from "cors";
 import cookieParser from "cookie-parser";
-import fileUpload from "express-fileupload";
+import multer from "multer";
 import { dbConnection } from "./database/db.js";
 import residentRouter from "./routes/resident.js";
 import adminRouter from "./routes/admin.js";
@@ -10,6 +10,7 @@ import adminRouter from "./routes/admin.js";
 const app = express();
 config({ path: "./config/config.env" });
 
+const uploads = multer({ dest: "uploads/" });
 //----------------------------- middlewears ------------------------------
 // app.use(
 //   cors({
@@ -33,7 +34,7 @@ app.use((req, res, next) => {
 });
 app.use(cookieParser());
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: false }));
 // app.use(
 //   fileUpload({
 //     useTempFiles: true,
@@ -45,6 +46,13 @@ app.use(express.urlencoded({ extended: true }));
 
 app.get("/", async (req, res) => {
   res.json({ name: "hell1" });
+});
+
+// uploading photos
+
+app.post("/upload", uploads.single("photo"), async (req, res) => {
+  console.log(req.body);
+  console.log(req.json);
 });
 
 // -------------------------- Calling DB CONNECTION ----------------------------------
