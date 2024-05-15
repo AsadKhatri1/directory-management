@@ -1,5 +1,5 @@
 import express from "express";
-const expressFormidable = require("express-formidable");
+
 import {
   allResidents,
   deleteResident,
@@ -11,7 +11,7 @@ import {
 
 const router = express.Router();
 
-router.post("/add", expressFormidable(), residentController);
+router.post("/add", residentController);
 
 router.get("/getResidents", allResidents);
 router.get("/getResident/:id", resident);

@@ -7,19 +7,21 @@ const vehicleSchema = mongoose.Schema({
   make: String,
   model: String,
   year: Number,
+  colour: String,
+  stickerNumber: String,
   registrationNumber: String,
 });
 const familyMemberSchema = mongoose.Schema({
   name: String,
   relation: String,
+  cnic: String,
+  dob: Date,
+  occupation: String,
+  number: String,
 });
 
 const residentSchema = mongoose.Schema(
   {
-    Photo: {
-      data: Buffer,
-      ContentType: String,
-    },
     FullName: {
       type: String,
       required: true,
@@ -73,10 +75,7 @@ const residentSchema = mongoose.Schema(
       type: String,
       default: "0",
     },
-    resAvatar: {
-      public_id: String,
-      url: String,
-    },
+
     paid: {
       type: Boolean,
       default: false,
