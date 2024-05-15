@@ -19,6 +19,14 @@ const familyMemberSchema = mongoose.Schema({
   occupation: String,
   number: String,
 });
+const maidsSchema = mongoose.Schema({
+  name: String,
+  guardian: String,
+  cnic: String,
+  dob: Date,
+  address: String,
+  number: String,
+});
 
 const residentSchema = mongoose.Schema(
   {
@@ -82,6 +90,7 @@ const residentSchema = mongoose.Schema(
     },
     relatives: [familyMemberSchema], // New field for family members
     vehicles: [vehicleSchema],
+    maids: [maidsSchema],
   },
   { timestamps: true }
 );

@@ -10,7 +10,7 @@ import adminRouter from "./routes/admin.js";
 const app = express();
 config({ path: "./config/config.env" });
 
-const uploads = multer({ dest: "uploads/" });
+const upload = multer({ dest: "upload/" });
 //----------------------------- middlewears ------------------------------
 // app.use(
 //   cors({
@@ -49,11 +49,6 @@ app.get("/", async (req, res) => {
 });
 
 // uploading photos
-
-app.post("/upload", uploads.single("photo"), async (req, res) => {
-  console.log(req.body);
-  console.log(req.json);
-});
 
 // -------------------------- Calling DB CONNECTION ----------------------------------
 
