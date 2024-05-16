@@ -25,6 +25,10 @@ export const residentController = async (req, res, next) => {
     Photo,
     CnicFile,
     NocFile,
+
+    CantFile,
+    VerificationFile,
+    LisenceFile,
   } = req.body;
 
   if (!FullName || !Email || !Phone || !HouseNumber || !CNIC) {
@@ -74,6 +78,9 @@ export const residentController = async (req, res, next) => {
     Photo,
     CnicFile,
     NocFile,
+    CantFile,
+    VerificationFile,
+    LisenceFile,
   });
 
   await newResident.save();

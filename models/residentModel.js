@@ -94,6 +94,10 @@ const residentSchema = mongoose.Schema(
     Photo: String,
     CnicFile: String,
     NocFile: String,
+
+    CantFile: String,
+    VerificationFile: String,
+    LisenceFile: String,
   },
   { timestamps: true }
 );
