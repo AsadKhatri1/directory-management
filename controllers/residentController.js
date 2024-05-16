@@ -22,7 +22,6 @@ export const residentController = async (req, res, next) => {
     vehicles,
     relatives,
     maids,
-    Photo,
   } = req.body;
 
   if (!FullName || !Email || !Phone || !HouseNumber || !CNIC) {
@@ -69,7 +68,6 @@ export const residentController = async (req, res, next) => {
     vehicles,
     relatives,
     maids,
-    Photo,
   });
 
   await newResident.save();
