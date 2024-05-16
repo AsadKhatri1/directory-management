@@ -92,6 +92,8 @@ const residentSchema = mongoose.Schema(
     vehicles: [vehicleSchema],
     maids: [maidsSchema],
     Photo: String,
+    CnicFile: String,
+    NocFile: String,
   },
   { timestamps: true }
 );
