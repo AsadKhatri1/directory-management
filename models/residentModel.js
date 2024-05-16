@@ -30,9 +30,6 @@ const maidsSchema = mongoose.Schema({
 
 const residentSchema = mongoose.Schema(
   {
-    // Photo: {
-    //   type: String,
-    // },
     FullName: {
       type: String,
       required: true,
@@ -94,6 +91,7 @@ const residentSchema = mongoose.Schema(
     relatives: [familyMemberSchema], // New field for family members
     vehicles: [vehicleSchema],
     maids: [maidsSchema],
+    Photo: String,
   },
   { timestamps: true }
 );
