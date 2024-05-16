@@ -20,7 +20,7 @@ const upload = multer({ dest: "upload/" });
 //   })
 // );
 // Allow requests from specific origins
-app.options("*", cors());
+app.use(cors());
 
 app.use(
   cors({
