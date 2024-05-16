@@ -31,10 +31,10 @@ export const residentController = async (req, res, next) => {
     LisenceFile,
   } = req.body;
 
-  if (!FullName || !Email || !Phone || !HouseNumber || !CNIC) {
+  if (!FullName || !Email || !Phone || !HouseNumber || !CNIC || !Photo) {
     return res.status(400).json({
       success: false,
-      message: "Please enter all fields of form to continue",
+      message: "Please enter all required fields of form to continue",
     });
   }
   if (Phone.length < 11) {
