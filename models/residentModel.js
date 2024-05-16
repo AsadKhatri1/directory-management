@@ -30,6 +30,9 @@ const maidsSchema = mongoose.Schema({
 
 const residentSchema = mongoose.Schema(
   {
+    // Photo: {
+    //   type: String,
+    // },
     FullName: {
       type: String,
       required: true,
