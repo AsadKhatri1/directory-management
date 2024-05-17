@@ -10,6 +10,7 @@ const vehicleSchema = mongoose.Schema({
   colour: String,
   stickerNumber: String,
   registrationNumber: String,
+  paperDocument: String,
 });
 const familyMemberSchema = mongoose.Schema({
   name: String,
@@ -18,6 +19,8 @@ const familyMemberSchema = mongoose.Schema({
   dob: Date,
   occupation: String,
   number: String,
+  photo: String,
+  cnic: String,
 });
 const maidsSchema = mongoose.Schema({
   name: String,
@@ -26,6 +29,8 @@ const maidsSchema = mongoose.Schema({
   dob: Date,
   address: String,
   number: String,
+  cnic: String,
+  cantPass: String,
 });
 
 const residentSchema = mongoose.Schema(
