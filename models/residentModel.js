@@ -19,8 +19,8 @@ const familyMemberSchema = mongoose.Schema({
   dob: Date,
   occupation: String,
   number: String,
-  photo: String,
-  cnic: String,
+  photoUrl: String,
+  cnicUrl: String,
 });
 const maidsSchema = mongoose.Schema({
   name: String,
