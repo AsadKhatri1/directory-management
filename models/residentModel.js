@@ -29,8 +29,8 @@ const maidsSchema = mongoose.Schema({
   dob: Date,
   address: String,
   number: String,
-  cnic: String,
-  cantPass: String,
+  cnicUrl: String,
+  cantPassUrl: String,
 });
 
 const residentSchema = mongoose.Schema(
