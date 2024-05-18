@@ -1,5 +1,5 @@
 import express from "express";
-
+import { auth } from "../middlewears/auth.js";
 import {
   allResidents,
   deleteResident,
@@ -11,13 +11,13 @@ import {
 
 const router = express.Router();
 
-router.post("/add", residentController);
+router.post("/add", auth, residentController);
 
 router.get("/getResidents", allResidents);
 router.get("/getResident/:id", resident);
-router.delete("/deleteResident/:id", deleteResident);
-router.put("/updateResident/:id", updateResident);
-router.post("/generateSlip/:residentId", slipCreate);
+router.delete("/deleteResident/:id", auth, deleteResident);
+router.put("/updateResident/:id", auth, updateResident);
+router.post("/generateSlip/:residentId", auth, slipCreate);
 // router.get("/search", searchResident);
 
 export default router;
