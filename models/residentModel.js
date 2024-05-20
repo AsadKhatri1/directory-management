@@ -32,7 +32,22 @@ const maidsSchema = mongoose.Schema({
   cnicUrl: String,
   cantPassUrl: String,
 });
-
+const tanentSchema = mongoose.Schema({
+  name: String,
+  cnic: String,
+  dob: Date,
+  occupation: String,
+  number: String,
+  nocIssue: {
+    type: Date,
+  },
+  nocNo: {
+    type: String,
+  },
+  photoUrl: String,
+  cnicUrl: String,
+  nocUrl: String,
+});
 const residentSchema = mongoose.Schema(
   {
     FullName: {
@@ -96,6 +111,7 @@ const residentSchema = mongoose.Schema(
     relatives: [familyMemberSchema], // New field for family members
     vehicles: [vehicleSchema],
     maids: [maidsSchema],
+    tanents: [tanentSchema],
     Photo: String,
     CnicFile: String,
     NocFile: String,
