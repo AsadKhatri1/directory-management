@@ -154,37 +154,18 @@ export const deleteResident = async (req, res) => {
 //---------------------------------- updating a single resident -----------------------
 export const updateResident = async (req, res) => {
   try {
-    const { FullName, Email, Phone, HouseNumber, CNIC, role, resAvatar } =
-      req.body;
+    const { paid } = req.body;
     const { id } = req.params;
 
-    if (!FullName || !Email || !Phone || !HouseNumber || !CNIC) {
+    if (!paid) {
       return res.status(400).json({
         success: false,
-        message: "Please enter all fields of form to continue",
-      });
-    }
-    if (Phone.length < 11) {
-      return res.status(400).json({
-        success: false,
-        message: "Phone number length should not be less than 11",
-      });
-    }
-    if (!validator.isEmail(Email)) {
-      return res.status(400).json({
-        success: false,
-        message: "Please enter valid email",
+        message: "Please fill payment status",
       });
     }
 
     const resident = await residentModel.findByIdAndUpdate(id, {
-      FullName,
-      Email,
-      Phone,
-      HouseNumber,
-      CNIC,
-      role,
-      resAvatar,
+      paid,
     });
 
     return res.status(200).send({
