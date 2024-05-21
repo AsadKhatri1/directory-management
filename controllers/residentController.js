@@ -157,7 +157,7 @@ export const updateResident = async (req, res) => {
     const { paid } = req.body;
     const { id } = req.params;
 
-    if (!paid) {
+    if (paid === null) {
       return res.status(400).json({
         success: false,
         message: "Please fill payment status",
@@ -170,7 +170,7 @@ export const updateResident = async (req, res) => {
 
     return res.status(200).send({
       success: true,
-      message: "Resident updated",
+      message: "Payment status updated",
       resident,
     });
   } catch (err) {
