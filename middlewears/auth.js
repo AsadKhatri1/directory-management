@@ -13,6 +13,6 @@ export const auth = async (req, res, next) => {
     next();
   } catch (err) {
     console.log(err);
-    req.send(401).json({ message: "Unauthorized user" });
+    req.status(401).json({ message: "Unauthorized user" });
   }
 };
