@@ -6,6 +6,7 @@ import multer from "multer";
 import { dbConnection } from "./database/db.js";
 import residentRouter from "./routes/resident.js";
 import adminRouter from "./routes/admin.js";
+import expenseRouter from "./routes/expense.js";
 
 const app = express();
 config({ path: "./config/config.env" });
@@ -58,5 +59,6 @@ dbConnection();
 
 app.use("/api/v1/resident", residentRouter);
 app.use("/api/v1/admin", adminRouter);
+app.use("/api/v1/expense", expenseRouter);
 
 export default app;
