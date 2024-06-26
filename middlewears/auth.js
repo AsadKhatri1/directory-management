@@ -8,11 +8,11 @@ export const auth = async (req, res, next) => {
       let user = jwt.verify(token, process.env.JWT_SECRET_KEY);
       req.userId = user.id;
     } else {
-      req.send(401).json({ message: "Unauthorized user" });
+      res.send(401).json({ message: "Unauthorized user" });
     }
     next();
   } catch (err) {
     console.log(err);
-    req.status(401).json({ message: "Unauthorized user" });
+    res.status(401).json({ message: "Unauthorized user" });
   }
 };
