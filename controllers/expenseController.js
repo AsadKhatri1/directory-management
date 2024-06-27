@@ -29,3 +29,19 @@ export const expenseController = async (req, res) => {
       .json({ sucess: false, message: "Error in adding expense" });
   }
 };
+
+// getting all expenses
+export const allExpenses = async (req, res) => {
+  try {
+    const expenseList = await expenseModel.find({});
+    if (expenseList) {
+      return res
+        .status(200)
+        .json({ success: true, message: "All expenses", expenseList });
+    }
+  } catch (err) {
+    return res
+      .status(500)
+      .json({ success: false, message: "Error in retreiving expenses" });
+  }
+};
