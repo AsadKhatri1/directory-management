@@ -45,3 +45,19 @@ export const allExpenses = async (req, res) => {
       .json({ success: false, message: "Error in retreiving expenses" });
   }
 };
+// getting single expense
+export const expense = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const expense = await expenseModel.findById(id);
+    if (expense) {
+      return res
+        .status(200)
+        .json({ success: true, message: "expenses", expense });
+    }
+  } catch (err) {
+    return res
+      .status(500)
+      .json({ success: false, message: "Error in retreiving expense" });
+  }
+};
