@@ -154,19 +154,44 @@ export const deleteResident = async (req, res) => {
 //---------------------------------- updating a single resident -----------------------
 export const updateResident = async (req, res) => {
   try {
-    const { paid } = req.body;
+    const { paid, numberOfMonths } = req.body;
     const { id } = req.params;
 
-    if (paid === null) {
+    if (paid === undefined) {
       return res.status(400).json({
         success: false,
-        message: "Please fill payment status",
+        message: "Please provide the payment status",
       });
     }
 
-    const resident = await residentModel.findByIdAndUpdate(id, {
-      paid,
+    if (paid && (numberOfMonths === undefined || numberOfMonths <= 0)) {
+      return res.status(400).json({
+        success: false,
+        message: "Please provide a valid number of months",
+      });
+    }
+
+    let updateFields = { paid };
+
+    if (paid) {
+      // Calculate the expiry date based on the number of months from now
+      const paidExpiry = new Date();
+      paidExpiry.setMonth(paidExpiry.getMonth() + numberOfMonths); // Use numberOfMonths from the request body
+      updateFields.paidExpiry = paidExpiry;
+    } else {
+      updateFields.paidExpiry = null; // Reset expiry when paid is false
+    }
+
+    const resident = await residentModel.findByIdAndUpdate(id, updateFields, {
+      new: true,
     });
+
+    if (!resident) {
+      return res.status(404).json({
+        success: false,
+        message: "Resident not found",
+      });
+    }
 
     return res.status(200).send({
       success: true,
@@ -174,7 +199,11 @@ export const updateResident = async (req, res) => {
       resident,
     });
   } catch (err) {
-    console.log(err);
+    console.error(err);
+    return res.status(500).send({
+      success: false,
+      message: "Internal server error",
+    });
   }
 };
 

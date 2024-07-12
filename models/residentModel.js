@@ -108,6 +108,10 @@ const residentSchema = mongoose.Schema(
       type: Boolean,
       default: false,
     },
+    paidExpiry: {
+      type: Date,
+    },
+
     relatives: [familyMemberSchema], // New field for family members
     vehicles: [vehicleSchema],
     maids: [maidsSchema],
