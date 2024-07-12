@@ -174,12 +174,11 @@ export const updateResident = async (req, res) => {
     let updateFields = { paid };
 
     if (paid) {
-      // Calculate the expiry date based on the number of months from now
       const paidExpiry = new Date();
-      paidExpiry.setMonth(paidExpiry.getMonth() + numberOfMonths); // Use numberOfMonths from the request body
+      paidExpiry.setMonth(paidExpiry.getMonth() + numberOfMonths);
       updateFields.paidExpiry = paidExpiry;
     } else {
-      updateFields.paidExpiry = null; // Reset expiry when paid is false
+      updateFields.paidExpiry = null;
     }
 
     const resident = await residentModel.findByIdAndUpdate(id, updateFields, {

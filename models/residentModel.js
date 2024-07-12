@@ -1,53 +1,3 @@
-import mongoose from "mongoose";
-import validator from "validator";
-// import jwt from "jsonwebtoken";
-
-const vehicleSchema = mongoose.Schema({
-  type: String,
-  make: String,
-  model: String,
-  year: Number,
-  colour: String,
-  stickerNumber: String,
-  registrationNumber: String,
-  paperDocument: String,
-});
-const familyMemberSchema = mongoose.Schema({
-  name: String,
-  relation: String,
-  cnic: String,
-  dob: Date,
-  occupation: String,
-  number: String,
-  photoUrl: String,
-  cnicUrl: String,
-});
-const maidsSchema = mongoose.Schema({
-  name: String,
-  guardian: String,
-  cnic: String,
-  dob: Date,
-  address: String,
-  number: String,
-  cnicUrl: String,
-  cantPassUrl: String,
-});
-const tanentSchema = mongoose.Schema({
-  name: String,
-  cnic: String,
-  dob: Date,
-  occupation: String,
-  number: String,
-  nocIssue: {
-    type: Date,
-  },
-  nocNo: {
-    type: String,
-  },
-  photoUrl: String,
-  cnicUrl: String,
-  nocUrl: String,
-});
 const residentSchema = mongoose.Schema(
   {
     FullName: {
@@ -96,14 +46,10 @@ const residentSchema = mongoose.Schema(
     NOCNo: {
       type: String,
     },
-    NOCNo: {
-      type: String,
-    },
     role: {
       type: String,
       default: "0",
     },
-
     paid: {
       type: Boolean,
       default: false,
@@ -111,15 +57,13 @@ const residentSchema = mongoose.Schema(
     paidExpiry: {
       type: Date,
     },
-
-    relatives: [familyMemberSchema], // New field for family members
+    relatives: [familyMemberSchema],
     vehicles: [vehicleSchema],
     maids: [maidsSchema],
     tanents: [tanentSchema],
     Photo: String,
     CnicFile: String,
     NocFile: String,
-
     CantFile: String,
     VerificationFile: String,
     LisenceFile: String,

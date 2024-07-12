@@ -8,6 +8,7 @@ import residentRouter from "./routes/resident.js";
 import adminRouter from "./routes/admin.js";
 import expenseRouter from "./routes/expense.js";
 import accRouter from "./routes/acc.js";
+import "./scheduler.js"; // Import the scheduler
 
 const app = express();
 config({ path: "./config/config.env" });
