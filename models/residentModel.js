@@ -1,3 +1,52 @@
+import mongoose from "mongoose";
+import validator from "validator";
+
+const vehicleSchema = mongoose.Schema({
+  type: String,
+  make: String,
+  model: String,
+  year: Number,
+  colour: String,
+  stickerNumber: String,
+  registrationNumber: String,
+  paperDocument: String,
+});
+const familyMemberSchema = mongoose.Schema({
+  name: String,
+  relation: String,
+  cnic: String,
+  dob: Date,
+  occupation: String,
+  number: String,
+  photoUrl: String,
+  cnicUrl: String,
+});
+const maidsSchema = mongoose.Schema({
+  name: String,
+  guardian: String,
+  cnic: String,
+  dob: Date,
+  address: String,
+  number: String,
+  cnicUrl: String,
+  cantPassUrl: String,
+});
+const tanentSchema = mongoose.Schema({
+  name: String,
+  cnic: String,
+  dob: Date,
+  occupation: String,
+  number: String,
+  nocIssue: {
+    type: Date,
+  },
+  nocNo: {
+    type: String,
+  },
+  photoUrl: String,
+  cnicUrl: String,
+  nocUrl: String,
+});
 const residentSchema = mongoose.Schema(
   {
     FullName: {

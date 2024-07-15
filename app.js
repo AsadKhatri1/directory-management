@@ -8,6 +8,7 @@ import residentRouter from "./routes/resident.js";
 import adminRouter from "./routes/admin.js";
 import expenseRouter from "./routes/expense.js";
 import accRouter from "./routes/acc.js";
+import incomeRouter from "./routes/income.js";
 import "./scheduler.js"; // Import the scheduler
 
 const app = express();
@@ -63,5 +64,6 @@ app.use("/api/v1/resident", residentRouter);
 app.use("/api/v1/admin", adminRouter);
 app.use("/api/v1/expense", expenseRouter);
 app.use("/api/v1/acc", accRouter);
+app.use("/api/v1/income", incomeRouter);
 
 export default app;
