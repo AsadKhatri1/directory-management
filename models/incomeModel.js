@@ -6,6 +6,9 @@ const incomeSchema = mongoose.Schema(
       type: String,
       required: true,
     },
+    HouseNo: {
+      type: String,
+    },
 
     Amount: {
       type: String,

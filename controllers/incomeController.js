@@ -3,9 +3,9 @@ import { incomeModel } from "../models/incomeModel.js";
 // creating income
 export const createIncome = async (req, res) => {
   try {
-    const { ResidentName, Amount } = req.body;
+    const { ResidentName, HouseNo, Amount } = req.body;
 
-    const newIncome = await new incomeModel({ ResidentName, Amount });
+    const newIncome = await new incomeModel({ ResidentName, HouseNo, Amount });
     await newIncome.save();
     return res.status(200).json({
       success: true,
