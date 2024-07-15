@@ -95,7 +95,7 @@ export const residentController = async (req, res, next) => {
 //---------------------------------- getting all residents -----------------------
 export const allResidents = async (req, res) => {
   try {
-    const residents = await residentModel.find();
+    const residents = await residentModel.find().sort({ createdAt: -1 });
     if (!residents) {
       return res.status(400).send({
         success: false,
