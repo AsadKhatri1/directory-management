@@ -14,6 +14,9 @@ const incomeSchema = mongoose.Schema(
       type: String,
       required: true,
     },
+    Reason: {
+      type: String,
+    },
   },
   { timestamps: true }
 );
