@@ -14,6 +14,12 @@ const incomeSchema = mongoose.Schema(
       type: String,
       required: true,
     },
+    Ownership: {
+      type: String,
+    },
+    Type: {
+      type: String,
+    },
     Reason: {
       type: String,
     },
