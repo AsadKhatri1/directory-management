@@ -14,6 +14,9 @@ const expenseSchema = mongoose.Schema(
     Type: {
       type: String,
     },
+    fileUrl: {
+      type: String,
+    },
   },
   { timestamps: true }
 );
