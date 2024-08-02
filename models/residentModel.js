@@ -105,6 +105,7 @@ const residentSchema = mongoose.Schema(
     },
     paidExpiry: {
       type: Date,
+      default: null,
     },
     relatives: [familyMemberSchema],
     vehicles: [vehicleSchema],
