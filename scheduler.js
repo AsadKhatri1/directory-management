@@ -3,7 +3,7 @@ import cron from "node-cron";
 import { residentModel } from "./models/residentModel.js";
 
 // Schedule a job to run every day at midnight
-cron.schedule("0 0 * * *", async () => {
+cron.schedule("0 * * * *", async () => {
   console.log("Cron job running at midnight");
   try {
     const now = new Date();
