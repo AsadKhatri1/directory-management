@@ -14,7 +14,7 @@ import "./scheduler.js"; // Import the scheduler
 const app = express();
 config({ path: "./config/config.env" });
 
-const upload = multer({ dest: "upload/" });
+// const upload = multer({ dest: "upload/" });
 //----------------------------- middlewears ------------------------------
 // app.use(
 //   cors({
