@@ -18,7 +18,7 @@ config({ path: "./config/config.env" });
 //----------------------------- middlewears ------------------------------
 app.use(
   cors({
-    origin: ["https://directory--sigma.vercel.app"],
+    origin: ["https://directory--sigma.vercel.app", "http://localhost:5173"],
     methods: ["GET", "POST", "DELETE", "PUT"],
     credentials: true,
   })
