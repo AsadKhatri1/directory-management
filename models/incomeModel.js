@@ -23,6 +23,12 @@ const incomeSchema = mongoose.Schema(
     Reason: {
       type: String,
     },
+    date: {
+      type: Date,
+    },
+    fileUrl: {
+      type: String,
+    },
   },
   { timestamps: true }
 );

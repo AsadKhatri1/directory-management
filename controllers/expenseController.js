@@ -4,7 +4,7 @@ import { expenseModel } from "../models/expenseModel.js";
 // Expense adding
 export const expenseController = async (req, res) => {
   try {
-    const { Title, Amount, Type, fileUrl } = req.body;
+    const { Title, Amount, Type, fileUrl, date } = req.body;
     if (!Title || !Amount) {
       return res
         .status(500)
@@ -16,6 +16,7 @@ export const expenseController = async (req, res) => {
       Amount,
       Type,
       fileUrl,
+      date,
     });
     await expense.save();
     return res.status(200).send({

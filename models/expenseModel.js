@@ -14,6 +14,9 @@ const expenseSchema = mongoose.Schema(
     Type: {
       type: String,
     },
+    date: {
+      type: Date,
+    },
     fileUrl: {
       type: String,
     },
