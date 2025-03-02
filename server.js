@@ -1,5 +1,5 @@
-import app from "./app.js";
-import cloudinary from "cloudinary";
+import app from './app.js';
+import cloudinary from 'cloudinary';
 
 // ------------- setting cloudinarey ----------------
 cloudinary.v2.config({
@@ -9,5 +9,5 @@ cloudinary.v2.config({
 });
 
 app.listen(process.env.PORT, () => {
-  console.log("Server is listening port 4000");
+  console.log('Server is listening port 4000');
 });

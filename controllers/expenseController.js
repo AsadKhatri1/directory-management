@@ -1,14 +1,14 @@
-import mongoose from "mongoose";
-import { expenseModel } from "../models/expenseModel.js";
+import mongoose from 'mongoose';
+import { expenseModel } from '../models/expenseModel.js';
 
 // Expense adding
 export const expenseController = async (req, res) => {
   try {
-    const { Title, Amount, Type, fileUrl } = req.body;
+    const { Title, Amount, Type, fileUrl, date } = req.body;
     if (!Title || !Amount) {
       return res
         .status(500)
-        .json({ success: false, message: "Add amount or title" });
+        .json({ success: false, message: 'Add amount or title' });
     }
 
     const expense = new expenseModel({
@@ -16,17 +16,18 @@ export const expenseController = async (req, res) => {
       Amount,
       Type,
       fileUrl,
+      date,
     });
     await expense.save();
     return res.status(200).send({
       success: true,
-      message: "Expense added successfully",
+      message: 'Expense added successfully',
       expense,
     });
   } catch (err) {
     return res
       .status(500)
-      .json({ success: false, message: "Error in adding expense" });
+      .json({ success: false, message: 'Error in adding expense' });
   }
 };
 
@@ -37,12 +38,12 @@ export const allExpenses = async (req, res) => {
     if (expenseList) {
       return res
         .status(200)
-        .json({ success: true, message: "All expenses", expenseList });
+        .json({ success: true, message: 'All expenses', expenseList });
     }
   } catch (err) {
     return res
       .status(500)
-      .json({ success: false, message: "Error in retrieving expenses" });
+      .json({ success: false, message: 'Error in retrieving expenses' });
   }
 };
 
@@ -54,11 +55,11 @@ export const expense = async (req, res) => {
     if (expense) {
       return res
         .status(200)
-        .json({ success: true, message: "Expense", expense });
+        .json({ success: true, message: 'Expense', expense });
     }
   } catch (err) {
     return res
       .status(500)
-      .json({ success: false, message: "Error in retrieving expense" });
+      .json({ success: false, message: 'Error in retrieving expense' });
   }
 };

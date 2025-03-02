@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 
 const incomeSchema = mongoose.Schema(
   {
@@ -23,8 +23,14 @@ const incomeSchema = mongoose.Schema(
     Reason: {
       type: String,
     },
+    fileUrl: {
+      type: String,
+    },
+    date: {
+      type: Date,
+    },
   },
   { timestamps: true }
 );
 
-export const incomeModel = mongoose.model("Income", incomeSchema);
+export const incomeModel = mongoose.model('Income', incomeSchema);

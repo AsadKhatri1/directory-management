@@ -1,9 +1,10 @@
-import { incomeModel } from "../models/incomeModel.js";
+import { incomeModel } from '../models/incomeModel.js';
 
 // creating income
 export const createIncome = async (req, res) => {
   try {
-    const { ResidentName, HouseNo, Amount, Ownership, Type, Reason } = req.body;
+    const { ResidentName, HouseNo, Amount, Ownership, Type, Reason, date } =
+      req.body;
 
     const newIncome = await new incomeModel({
       ResidentName,
@@ -12,18 +13,19 @@ export const createIncome = async (req, res) => {
       Reason,
       Ownership,
       Type,
+      date,
     });
     await newIncome.save();
     return res.status(200).json({
       success: true,
-      message: "Income created succesfully",
+      message: 'Income created succesfully',
       newIncome,
     });
   } catch (err) {
     console.log(err);
     return res.status(400).json({
       success: true,
-      message: "Income isntcreated ",
+      message: 'Income isntcreated ',
     });
   }
 };
@@ -36,11 +38,11 @@ export const allIncomes = async (req, res) => {
     if (incomeList) {
       return res
         .status(200)
-        .json({ success: true, message: "All incomes", incomeList });
+        .json({ success: true, message: 'All incomes', incomeList });
     }
   } catch (err) {
     return res
       .status(500)
-      .json({ success: false, message: "Error in retreiving incomes" });
+      .json({ success: false, message: 'Error in retreiving incomes' });
   }
 };

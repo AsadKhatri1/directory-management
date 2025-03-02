@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 
 const expenseSchema = mongoose.Schema(
   {
@@ -17,8 +17,11 @@ const expenseSchema = mongoose.Schema(
     fileUrl: {
       type: String,
     },
+    date: {
+      type: Date,
+    },
   },
   { timestamps: true }
 );
 
-export const expenseModel = mongoose.model("Expenses", expenseSchema);
+export const expenseModel = mongoose.model('Expenses', expenseSchema);
