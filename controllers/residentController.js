@@ -205,6 +205,36 @@ export const updateResident = async (req, res) => {
     });
   }
 };
+//---------------------------------- updating a single resident -----------------------
+export const updateResidentData = async (req, res) => {
+  try {
+    const data = req.body;
+    const { id } = req.params;
+
+    const resident = await residentModel.findByIdAndUpdate(id, data, {
+      new: true,
+    });
+
+    if (!resident) {
+      return res.status(404).json({
+        success: false,
+        message: "Resident not found",
+      });
+    }
+
+    return res.status(200).send({
+      success: true,
+      message: "Payment status updated",
+      resident,
+    });
+  } catch (err) {
+    console.error(err);
+    return res.status(500).send({
+      success: false,
+      message: "Internal server error",
+    });
+  }
+};
 
 // ---------------- search API ------------------------
 
