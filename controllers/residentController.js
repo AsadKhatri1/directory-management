@@ -1,7 +1,7 @@
 // import { residentModel } from "../models/residentModel.js";
 
-import { residentModel } from "../models/residentModel.js";
-import validator from "validator";
+import { residentModel } from '../models/residentModel.js';
+import validator from 'validator';
 
 // ------------------------------- creating resident -----------------------------------------
 export const residentController = async (req, res, next) => {
@@ -34,19 +34,19 @@ export const residentController = async (req, res, next) => {
   if (!FullName || !Email || !Phone || !HouseNumber || !CNIC || !Photo) {
     return res.status(400).json({
       success: false,
-      message: "Please enter all required fields of form to continue",
+      message: 'Please enter all required fields of form to continue',
     });
   }
   if (Phone.length < 11) {
     return res.status(400).json({
       success: false,
-      message: "Phone number length should not be less than 11",
+      message: 'Phone number length should not be less than 11',
     });
   }
   if (!validator.isEmail(Email)) {
     return res.status(400).json({
       success: false,
-      message: "Please enter valid email",
+      message: 'Please enter valid email',
     });
   }
 
@@ -54,7 +54,7 @@ export const residentController = async (req, res, next) => {
   if (userExists) {
     return res.status(400).json({
       success: false,
-      message: "User already exists",
+      message: 'User already exists',
     });
   }
 
@@ -87,7 +87,7 @@ export const residentController = async (req, res, next) => {
   await newResident.save();
   return res.status(200).send({
     success: true,
-    message: "New resident registered succesfully",
+    message: 'New resident registered succesfully',
     newResident,
   });
 };
@@ -99,12 +99,12 @@ export const allResidents = async (req, res) => {
     if (!residents) {
       return res.status(400).send({
         success: false,
-        message: "No resident found",
+        message: 'No resident found',
       });
     } else {
       return res.status(200).send({
         success: true,
-        message: "All residents list",
+        message: 'All residents list',
         residents,
       });
     }
@@ -121,12 +121,12 @@ export const resident = async (req, res) => {
     if (!resident) {
       return res.status(400).send({
         success: false,
-        message: "No resident found",
+        message: 'No resident found',
       });
     } else {
       return res.status(200).send({
         success: true,
-        message: "Single resident found",
+        message: 'Single resident found',
         resident,
       });
     }
@@ -143,7 +143,7 @@ export const deleteResident = async (req, res) => {
 
     return res.status(200).send({
       success: true,
-      message: "Resident deleted",
+      message: 'Resident deleted',
       resident,
     });
   } catch (err) {
@@ -160,14 +160,14 @@ export const updateResident = async (req, res) => {
     if (paid === undefined) {
       return res.status(400).json({
         success: false,
-        message: "Please provide the payment status",
+        message: 'Please provide the payment status',
       });
     }
 
     if (paid && (numberOfMonths === undefined || numberOfMonths <= 0)) {
       return res.status(400).json({
         success: false,
-        message: "Please provide a valid number of months",
+        message: 'Please provide a valid number of months',
       });
     }
 
@@ -188,20 +188,20 @@ export const updateResident = async (req, res) => {
     if (!resident) {
       return res.status(404).json({
         success: false,
-        message: "Resident not found",
+        message: 'Resident not found',
       });
     }
 
     return res.status(200).send({
       success: true,
-      message: "Payment status updated",
+      message: 'Payment status updated',
       resident,
     });
   } catch (err) {
     console.error(err);
     return res.status(500).send({
       success: false,
-      message: "Internal server error",
+      message: 'Internal server error',
     });
   }
 };
@@ -244,15 +244,15 @@ export const slipCreate = async (req, res) => {
 
     res.status(200).json({
       success: true,
-      message: "Fee slip generated successfully",
+      message: 'Fee slip generated successfully',
       resident,
       totalFee,
       numberOfMonths,
     });
   } catch (error) {
-    console.error("Error generating fee slip:", error);
+    console.error('Error generating fee slip:', error);
     res
       .status(500)
-      .json({ success: false, message: "Failed to generate fee slip" });
+      .json({ success: false, message: 'Failed to generate fee slip' });
   }
 };
