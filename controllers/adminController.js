@@ -1,8 +1,8 @@
-import mongoose from "mongoose";
-import validator from "validator";
-import bcrypt from "bcryptjs";
-import { adminModel } from "../models/adminModel.js";
-import jwt from "jsonwebtoken";
+import mongoose from 'mongoose';
+import validator from 'validator';
+import bcrypt from 'bcryptjs';
+import { adminModel } from '../models/adminModel.js';
+import jwt from 'jsonwebtoken';
 
 // admin adding
 export const adminController = async (req, res) => {
@@ -11,7 +11,7 @@ export const adminController = async (req, res) => {
   if (!validator.isEmail(Email)) {
     return res.status(400).send({
       success: false,
-      message: "Enter valid email",
+      message: 'Enter valid email',
     });
   }
   if (Password) {
@@ -29,7 +29,7 @@ export const adminController = async (req, res) => {
   await admin.save();
   return res.status(200).send({
     success: true,
-    message: "Admin added succesfully",
+    message: 'Admin added succesfully',
     admin,
   });
 };
@@ -41,14 +41,14 @@ export const adminLogin = async (req, res) => {
   if (!Email || !validator.isEmail(Email)) {
     return res.status(400).send({
       success: false,
-      message: "Enter valid email address",
+      message: 'Enter valid email address',
     });
   }
   const adminExist = await adminModel.findOne({ Email });
   if (!adminExist) {
     return res.status(400).send({
       success: false,
-      message: "No admin found with this Email",
+      message: 'No admin found with this Email',
     });
   }
 
@@ -56,7 +56,7 @@ export const adminLogin = async (req, res) => {
   if (!passCheck) {
     return res.status(400).send({
       success: false,
-      message: "Wrong password",
+      message: 'Wrong password',
     });
   }
   if (passCheck) {
@@ -65,7 +65,7 @@ export const adminLogin = async (req, res) => {
     });
     return res.status(200).send({
       success: true,
-      message: "Admin loggedin succesfully",
+      message: 'Admin loggedin succesfully',
       token: token,
     });
   }
@@ -79,12 +79,12 @@ export const getAdmin = async (req, res) => {
     if (!admins) {
       return res.status(400).send({
         success: false,
-        message: "No admin found",
+        message: 'No admin found',
       });
     } else {
       return res.status(200).send({
         success: true,
-        message: "All admin list",
+        message: 'All admin list',
         admins,
       });
     }
