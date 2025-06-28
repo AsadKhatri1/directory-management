@@ -29,6 +29,7 @@ export const residentController = async (req, res, next) => {
     CantFile,
     VerificationFile,
     LisenceFile,
+    residentType,
   } = req.body;
 
   if (!FullName || !Email || !Phone || !HouseNumber || !CNIC || !Photo) {
@@ -82,6 +83,7 @@ export const residentController = async (req, res, next) => {
     CantFile,
     VerificationFile,
     LisenceFile,
+    residentType,
   });
 
   await newResident.save();
@@ -267,7 +269,7 @@ export const slipCreate = async (req, res) => {
     // Logic to generate the fee slip
     // Calculate total fee based on the fixed monthly fee and the number of months
     const numberOfMonths = req.body.numberOfMonths;
-    const monthlyFee = 2000;
+    const monthlyFee = 1500;
     const totalFee = numberOfMonths * monthlyFee;
     // Save the fee slip to the database or perform any other necessary actions
     // Return success message or fee slip data

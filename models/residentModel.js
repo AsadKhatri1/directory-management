@@ -1,5 +1,5 @@
-import mongoose from 'mongoose';
-import validator from 'validator';
+import mongoose from "mongoose";
+import validator from "validator";
 
 const vehicleSchema = mongoose.Schema({
   type: String,
@@ -56,12 +56,12 @@ const residentSchema = mongoose.Schema(
     Email: {
       type: String,
       required: true,
-      validate: [validator.isEmail, 'Enter valid email'],
+      validate: [validator.isEmail, "Enter valid email"],
     },
     Phone: {
       type: String,
       required: true,
-      minLength: [11, 'Please enter at least 11 characters'],
+      minLength: [11, "Please enter at least 11 characters"],
     },
     HouseNumber: {
       type: String,
@@ -97,7 +97,7 @@ const residentSchema = mongoose.Schema(
     },
     role: {
       type: String,
-      default: '0',
+      default: "0",
     },
     paid: {
       type: Boolean,
@@ -106,6 +106,10 @@ const residentSchema = mongoose.Schema(
     paidExpiry: {
       type: Date,
       default: null,
+    },
+    residentType: {
+      type: String,
+      default: "owner",
     },
     relatives: [familyMemberSchema],
     vehicles: [vehicleSchema],
@@ -121,4 +125,4 @@ const residentSchema = mongoose.Schema(
   { timestamps: true }
 );
 
-export const residentModel = mongoose.model('Residents', residentSchema);
+export const residentModel = mongoose.model("Residents", residentSchema);
