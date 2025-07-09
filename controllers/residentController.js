@@ -121,8 +121,8 @@ export const getResidentByHouse = async (req, res) => {
 
     const residents = await residentModel
       .find({
-        houseNo,
-        type: { $ne: type },
+        HouseNumber: houseNo,
+        residentType: { $ne: type },
       })
       .sort({ createdAt: -1 });
 
