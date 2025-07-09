@@ -118,17 +118,11 @@ export const allResidents = async (req, res) => {
 export const getResidentByHouse = async (req, res) => {
   try {
     const { houseNo, type } = req.params;
-    let resident_type;
-    if (type == "owner") {
-      resident_type = "tenant";
-    } else {
-      resident_type = "owner";
-    }
 
     const residents = await residentModel
       .find({
         HouseNumber: houseNo,
-        residentType: resident_type,
+        residentType: { $ne: type },
       })
       .sort({ createdAt: -1 });
 
