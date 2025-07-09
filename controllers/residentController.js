@@ -115,6 +115,39 @@ export const allResidents = async (req, res) => {
   }
 };
 
+export const getResidentByHouse = async (req, res) => {
+  try {
+    const { houseNo, type } = req.params;
+
+    const residents = await residentModel
+      .find({
+        houseNo,
+        type: { $ne: type },
+      })
+      .sort({ createdAt: -1 });
+
+    if (residents.length === 0) {
+      return res.status(404).send({
+        success: false,
+        message: "No matching residents found",
+      });
+    }
+
+    return res.status(200).send({
+      success: true,
+      message: "Residents list (filtered by type)",
+      residents,
+    });
+  } catch (err) {
+    console.log(err);
+    return res.status(500).send({
+      success: false,
+      message: "Server error",
+      error: err.message,
+    });
+  }
+};
+
 //---------------------------------- getting single resident -----------------------
 export const resident = async (req, res) => {
   try {

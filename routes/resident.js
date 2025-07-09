@@ -16,6 +16,7 @@ import {
   deleteMaid,
   addTenant,
   deleteTenant,
+  getResidentByHouse,
 } from "../controllers/residentController.js";
 
 const router = express.Router();
@@ -24,6 +25,7 @@ router.post("/add", auth, residentController);
 
 router.get("/getResidents", allResidents);
 router.get("/getResident/:id", resident);
+router.get("/getResident/:houseNo/:type", getResidentByHouse);
 router.delete("/deleteResident/:id", auth, deleteResident);
 router.put("/updateResident/:id", auth, updateResident);
 router.put("/updateResidentData/:id", auth, updateResidentData);
