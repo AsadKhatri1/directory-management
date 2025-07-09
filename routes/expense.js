@@ -1,6 +1,7 @@
 import express from "express";
 import {
   allExpenses,
+  deleteExpense,
   expense,
   expenseController,
 } from "../controllers/expenseController.js";
@@ -10,4 +11,5 @@ const router = express.Router();
 router.post("/addExpense", expenseController);
 router.get("/expenses", allExpenses);
 router.get("/getExpense/:id", expense);
+router.delete("/deleteExpense/:id", deleteExpense);
 export default router;
