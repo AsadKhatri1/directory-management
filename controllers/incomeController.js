@@ -75,7 +75,7 @@ export const deleteIncome = async (req, res) => {
     }
 
     // Find the expense and verify ownership
-    const expense = await incomeModel.findOne({ _id: id });
+    const expense = await incomeModel.findById(id);
     if (!expense) {
       return res.status(404).json({
         success: false,
