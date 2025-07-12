@@ -59,47 +59,53 @@ export const allIncomes = async (req, res) => {
 };
 
 
-export const deleteIncome = async (req, res) => {
-  try {
-    const { id } = req.params;
+// export const deleteIncome = async (req, res) => {
+//   try {
+//     const { id } = req.params;
 
-    // if (!id) {
-    //   return res
-    //     .status(400)
-    //     .json({ success: false, message: "Income ID is required" });
-    // }
+//     // if (!id) {
+//     //   return res
+//     //     .status(400)
+//     //     .json({ success: false, message: "Income ID is required" });
+//     // }
 
-    // if (!mongoose.isValidObjectId(id)) {
-    //   return res
-    //     .status(400)
-    //     .json({ success: false, message: "Invalid Income ID" });
-    // }
+//     // if (!mongoose.isValidObjectId(id)) {
+//     //   return res
+//     //     .status(400)
+//     //     .json({ success: false, message: "Invalid Income ID" });
+//     // }
 
-    // Find the expense and verify ownership
-    // const expense = await incomeModel.findById(id);
-    // if (!expense) {
-    //   return res.status(404).json({
-    //     success: false,
-    //     message: "Income not found or you do not have permission to delete it",
-    //   });
-    // }
+//     // Find the expense and verify ownership
+//     // const expense = await incomeModel.findById(id);
+//     // if (!expense) {
+//     //   return res.status(404).json({
+//     //     success: false,
+//     //     message: "Income not found or you do not have permission to delete it",
+//     //   });
+//     // }
 
-    // Delete the expense
-    // const result = await incomeModel.deleteOne({ _id: id });
+//     // Delete the expense
+//     // const result = await incomeModel.deleteOne({ _id: id });
 
-    // // Check if deletion was successful
-    // if (result.deletedCount === 0) {
-    //   return res
-    //     .status(404)
-    //     .json({ success: false, message: "Income not found" });
-    // }
+//     // // Check if deletion was successful
+//     // if (result.deletedCount === 0) {
+//     //   return res
+//     //     .status(404)
+//     //     .json({ success: false, message: "Income not found" });
+//     // }
 
-    return res
-      .status(200).json({ success: true, message: "Income deleted successfully", id : req.params });
-  } catch (err) {
-    console.error("Error deleting expense:", err);
-    return res
-      .status(500)
-      .json({ success: false, message: "Failed To Delete Expense " });
-  }
-};
+//     return res
+//       .status(200).json({ success: true, message: "Income deleted successfully", id : req.params });
+//   } catch (err) {
+//     console.error("Error deleting expense:", err);
+//     return res
+//       .status(500)
+//       .json({ success: false, message: "Failed To Delete Expense " });
+//   }
+// };
+
+
+
+export const deleteIncome = async(req,res) =>{
+  res.json(200).json({ success : true, message : "Delete"})
+}
