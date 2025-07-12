@@ -108,10 +108,6 @@ export const allIncomes = async (req, res) => {
 
 
 
-
-import mongoose from "mongoose";
-import incomeModel from "../models/incomeModel.js"; // adjust path as needed
-
 export const deleteIncome = async (req, res) => {
   try {
     const { id } = req.params;
