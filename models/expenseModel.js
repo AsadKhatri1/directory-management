@@ -17,6 +17,11 @@ const expenseSchema = mongoose.Schema(
     date: {
       type: Date,
     },
+    account :{
+            type: String,
+            enum: ['rec' ,'masjid'],  // Example accounts only send 'rec' or 'masjid'
+            required: true
+    },
     fileUrl: {
       type: String,
     },

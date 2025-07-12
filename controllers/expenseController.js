@@ -4,17 +4,19 @@ import { expenseModel } from "../models/expenseModel.js";
 // Expense adding
 export const expenseController = async (req, res) => {
   try {
-    const { Title, Amount, Type, fileUrl, date } = req.body;
-    if (!Title || !Amount) {
+    const { Title, Amount, Type, fileUrl, date , account } = req.body;
+    if (!Title || !Amount || !account) {
       return res
         .status(500)
         .json({ success: false, message: "Add amount or title" });
     }
 
+            
     const expense = new expenseModel({
       Title,
       Amount,
       Type,
+      account,
       fileUrl,
       date,
     });
