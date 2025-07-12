@@ -63,17 +63,17 @@ export const deleteIncome = async (req, res) => {
   try {
     const { id } = req.params;
 
-    if (!id) {
-      return res
-        .status(400)
-        .json({ success: false, message: "Income ID is required" });
-    }
+    // if (!id) {
+    //   return res
+    //     .status(400)
+    //     .json({ success: false, message: "Income ID is required" });
+    // }
 
-    if (!mongoose.isValidObjectId(id)) {
-      return res
-        .status(400)
-        .json({ success: false, message: "Invalid Income ID" });
-    }
+    // if (!mongoose.isValidObjectId(id)) {
+    //   return res
+    //     .status(400)
+    //     .json({ success: false, message: "Invalid Income ID" });
+    // }
 
     // Find the expense and verify ownership
     // const expense = await incomeModel.findById(id);
@@ -95,8 +95,7 @@ export const deleteIncome = async (req, res) => {
     // }
 
     return res
-      .status(200)
-      .json({ success: true, message: "Income deleted successfully", id });
+      .status(200).json({ success: true, message: "Income deleted successfully", id : req.params });
   } catch (err) {
     console.error("Error deleting expense:", err);
     return res
