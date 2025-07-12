@@ -100,6 +100,6 @@ export const deleteIncome = async (req, res) => {
     console.error("Error deleting expense:", err);
     return res
       .status(500)
-      .json({ success: false, message: "Error deleting expense", err });
+      .json({ success: false, message:  err || "" });
   }
 };
