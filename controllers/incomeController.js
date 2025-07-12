@@ -128,7 +128,7 @@ export const deleteIncome = async (req, res) => {
     if (!income) {
       return res.status(404).json({ success: false, message: "Income not found" });
     }
-
+ 
     const result = await incomeModel.deleteOne({ _id: id });
 
     if (result.deletedCount === 0) {
