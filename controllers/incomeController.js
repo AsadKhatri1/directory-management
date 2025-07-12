@@ -108,6 +108,7 @@ export const allIncomes = async (req, res) => {
 
 export const deleteIncome = async(req,res) =>{
   const {id} = req.params;
+  try {
   if(!id){
     return res.status(400).json({success : false , message : "Income ID is required"})
   } 
@@ -115,5 +116,15 @@ export const deleteIncome = async(req,res) =>{
   if(!income){
     return res.status(404).json({success : false , message : "Income not found"})
   }
-  return res.status(200).json({ success : true, message : "Delete" , income})
+  const result = await incomeModel.deleteOne({ _id: id });
+  // Check if deletion was successful
+  if (result.deletedCount === 0) {
+    return res.status(404).json({ success: false, message: "Income not found" });
+  }
+  return res.status(200).json({ success : true, message : "Delete" , result})   
+  } catch (error) {
+    console.error("Error deleting income:", error);
+    return res.status(500).json({ success: false, message: "Failed to delete income" });
+  }
+ 
 }
