@@ -107,5 +107,9 @@ export const allIncomes = async (req, res) => {
 
 
 export const deleteIncome = async(req,res) =>{
-  res.json(200).json({ success : true, message : "Delete"})
+  const {id} = req.params;
+  if(!id){
+    return res.status(400).json({success : false , message : "Income ID is required"})
+  } 
+  return res.json(200).json({ success : true, message : "Delete"})
 }
