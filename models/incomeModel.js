@@ -9,7 +9,11 @@ const incomeSchema = mongoose.Schema(
     HouseNo: {
       type: String,
     },
-
+    account: {
+      type: String,
+      enum: ['rec', 'masjid'],  // Example accounts only send 'rec' or 'masjid'
+      required: true
+    },
     Amount: {
       type: String,
       required: true,

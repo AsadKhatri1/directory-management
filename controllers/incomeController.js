@@ -7,6 +7,7 @@ export const createIncome = async (req, res) => {
       ResidentName,
       HouseNo,
       Amount,
+      account,
       Ownership,
       Type,
       Reason,
@@ -21,6 +22,7 @@ export const createIncome = async (req, res) => {
       Reason,
       Ownership,
       Type,
+      account,
       date,
       fileUrl,
     });
