@@ -76,13 +76,13 @@ export const deleteIncome = async (req, res) => {
     }
 
     // Find the expense and verify ownership
-    const expense = await incomeModel.findById(id);
-    if (!expense) {
-      return res.status(404).json({
-        success: false,
-        message: "Income not found or you do not have permission to delete it",
-      });
-    }
+    // const expense = await incomeModel.findById(id);
+    // if (!expense) {
+    //   return res.status(404).json({
+    //     success: false,
+    //     message: "Income not found or you do not have permission to delete it",
+    //   });
+    // }
 
     // Delete the expense
     // const result = await incomeModel.deleteOne({ _id: id });
@@ -96,7 +96,7 @@ export const deleteIncome = async (req, res) => {
 
     return res
       .status(200)
-      .json({ success: true, message: "Income deleted successfully", expense });
+      .json({ success: true, message: "Income deleted successfully", id });
   } catch (err) {
     console.error("Error deleting expense:", err);
     return res
