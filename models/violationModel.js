@@ -9,7 +9,8 @@ const violationSchema = mongoose.Schema(
 
     Resident: {
       type: String,
-      required: true,
+      required: false,
+      default: 'Unknown',
     },
     Title: {
       type: String,
