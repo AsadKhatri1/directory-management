@@ -1,7 +1,7 @@
 // import { residentModel } from "../models/residentModel.js";
 
-import { residentModel } from "../models/residentModel.js";
-import validator from "validator";
+import { residentModel } from '../models/residentModel.js';
+import validator from 'validator';
 
 // ------------------------------- creating resident -----------------------------------------
 export const residentController = async (req, res, next) => {
@@ -35,19 +35,19 @@ export const residentController = async (req, res, next) => {
   if (!FullName || !Email || !Phone || !HouseNumber || !CNIC || !Photo) {
     return res.status(400).json({
       success: false,
-      message: "Please enter all required fields of form to continue",
+      message: 'Please enter all required fields of form to continue',
     });
   }
   if (Phone.length < 11) {
     return res.status(400).json({
       success: false,
-      message: "Phone number length should not be less than 11",
+      message: 'Phone number length should not be less than 11',
     });
   }
   if (!validator.isEmail(Email)) {
     return res.status(400).json({
       success: false,
-      message: "Please enter valid email",
+      message: 'Please enter valid email',
     });
   }
 
@@ -55,7 +55,7 @@ export const residentController = async (req, res, next) => {
   if (userExists) {
     return res.status(400).json({
       success: false,
-      message: "User already exists",
+      message: 'User already exists',
     });
   }
 
@@ -89,7 +89,7 @@ export const residentController = async (req, res, next) => {
   await newResident.save();
   return res.status(200).send({
     success: true,
-    message: "New resident registered succesfully",
+    message: 'New resident registered succesfully',
     newResident,
   });
 };
@@ -101,12 +101,12 @@ export const allResidents = async (req, res) => {
     if (!residents) {
       return res.status(400).send({
         success: false,
-        message: "No resident found",
+        message: 'No resident found',
       });
     } else {
       return res.status(200).send({
         success: true,
-        message: "All residents list",
+        message: 'All residents list',
         residents,
       });
     }
@@ -129,20 +129,20 @@ export const getResidentByHouse = async (req, res) => {
     if (residents.length === 0) {
       return res.status(404).send({
         success: false,
-        message: "No matching residents found",
+        message: 'No matching residents found',
       });
     }
 
     return res.status(200).send({
       success: true,
-      message: "Residents list (filtered by type)",
+      message: 'Residents list (filtered by type)',
       residents,
     });
   } catch (err) {
     console.log(err);
     return res.status(500).send({
       success: false,
-      message: "Server error",
+      message: 'Server error',
       error: err.message,
     });
   }
@@ -156,12 +156,12 @@ export const resident = async (req, res) => {
     if (!resident) {
       return res.status(400).send({
         success: false,
-        message: "No resident found",
+        message: 'No resident found',
       });
     } else {
       return res.status(200).send({
         success: true,
-        message: "Single resident found",
+        message: 'Single resident found',
         resident,
       });
     }
@@ -178,7 +178,7 @@ export const deleteResident = async (req, res) => {
 
     return res.status(200).send({
       success: true,
-      message: "Resident deleted",
+      message: 'Resident deleted',
       resident,
     });
   } catch (err) {
@@ -195,14 +195,14 @@ export const updateResident = async (req, res) => {
     if (paid === undefined) {
       return res.status(400).json({
         success: false,
-        message: "Please provide the payment status",
+        message: 'Please provide the payment status',
       });
     }
 
     if (paid && (numberOfMonths === undefined || numberOfMonths <= 0)) {
       return res.status(400).json({
         success: false,
-        message: "Please provide a valid number of months",
+        message: 'Please provide a valid number of months',
       });
     }
 
@@ -223,20 +223,20 @@ export const updateResident = async (req, res) => {
     if (!resident) {
       return res.status(404).json({
         success: false,
-        message: "Resident not found",
+        message: 'Resident not found',
       });
     }
 
     return res.status(200).send({
       success: true,
-      message: "Payment status updated",
+      message: 'Payment status updated',
       resident,
     });
   } catch (err) {
     console.error(err);
     return res.status(500).send({
       success: false,
-      message: "Internal server error",
+      message: 'Internal server error',
     });
   }
 };
@@ -253,20 +253,20 @@ export const updateResidentData = async (req, res) => {
     if (!resident) {
       return res.status(404).json({
         success: false,
-        message: "Resident not found",
+        message: 'Resident not found',
       });
     }
 
     return res.status(200).send({
       success: true,
-      message: "Payment status updated",
+      message: 'Payment status updated',
       resident,
     });
   } catch (err) {
     console.error(err);
     return res.status(500).send({
       success: false,
-      message: "Internal server error",
+      message: 'Internal server error',
     });
   }
 };
@@ -309,16 +309,16 @@ export const slipCreate = async (req, res) => {
 
     res.status(200).json({
       success: true,
-      message: "Fee slip generated successfully",
+      message: 'Fee slip generated successfully',
       resident,
       totalFee,
       numberOfMonths,
     });
   } catch (error) {
-    console.error("Error generating fee slip:", error);
+    console.error('Error generating fee slip:', error);
     res
       .status(500)
-      .json({ success: false, message: "Failed to generate fee slip" });
+      .json({ success: false, message: 'Failed to generate fee slip' });
   }
 };
 
@@ -332,20 +332,20 @@ export const addFamilyMember = async (req, res) => {
 
     const resident = await residentModel.findById(residentId);
     if (!resident) {
-      return res.status(404).json({ message: "Resident not found" });
+      return res.status(404).json({ message: 'Resident not found' });
     }
 
     resident.relatives.push(familyMemberData);
     await resident.save();
 
     res.status(200).json({
-      message: "Family member added successfully",
+      message: 'Family member added successfully',
       familyMember: familyMemberData,
     });
   } catch (error) {
     res
       .status(500)
-      .json({ message: "Error adding family member", error: error.message });
+      .json({ message: 'Error adding family member', error: error.message });
   }
 };
 
@@ -356,7 +356,7 @@ export const deleteFamilyMember = async (req, res) => {
 
     const resident = await residentModel.findById(residentId);
     if (!resident) {
-      return res.status(404).json({ message: "Resident not found" });
+      return res.status(404).json({ message: 'Resident not found' });
     }
 
     resident.relatives = resident.relatives.filter(
@@ -364,11 +364,47 @@ export const deleteFamilyMember = async (req, res) => {
     );
     await resident.save();
 
-    res.status(200).json({ message: "Family member deleted successfully" });
+    res.status(200).json({ message: 'Family member deleted successfully' });
   } catch (error) {
     res
       .status(500)
-      .json({ message: "Error deleting family member", error: error.message });
+      .json({ message: 'Error deleting family member', error: error.message });
+  }
+};
+
+// edit family member
+// Edit Family Member
+export const editFamilyMember = async (req, res) => {
+  try {
+    const { residentId, familyMemberId } = req.params;
+    const updatedData = req.body;
+
+    const resident = await residentModel.findById(residentId);
+    if (!resident) {
+      return res.status(404).json({ message: 'Resident not found' });
+    }
+
+    // Find family member by ID
+    const familyMember = resident.relatives.id(familyMemberId);
+    if (!familyMember) {
+      return res.status(404).json({ message: 'Family member not found' });
+    }
+
+    // Update fields
+    Object.keys(updatedData).forEach((key) => {
+      familyMember[key] = updatedData[key];
+    });
+
+    await resident.save();
+
+    res.status(200).json({
+      message: 'Family member updated successfully',
+      familyMember,
+    });
+  } catch (error) {
+    res
+      .status(500)
+      .json({ message: 'Error updating family member', error: error.message });
   }
 };
 
@@ -380,20 +416,20 @@ export const addVehicle = async (req, res) => {
 
     const resident = await residentModel.findById(residentId);
     if (!resident) {
-      return res.status(404).json({ message: "Resident not found" });
+      return res.status(404).json({ message: 'Resident not found' });
     }
 
     resident.vehicles.push(vehicleData);
     await resident.save();
 
     res.status(200).json({
-      message: "Vehicle added successfully",
+      message: 'Vehicle added successfully',
       vehicle: vehicleData,
     });
   } catch (error) {
     res
       .status(500)
-      .json({ message: "Error adding vehicle", error: error.message });
+      .json({ message: 'Error adding vehicle', error: error.message });
   }
 };
 
@@ -404,7 +440,7 @@ export const deleteVehicle = async (req, res) => {
 
     const resident = await residentModel.findById(residentId);
     if (!resident) {
-      return res.status(404).json({ message: "Resident not found" });
+      return res.status(404).json({ message: 'Resident not found' });
     }
 
     resident.vehicles = resident.vehicles.filter(
@@ -412,11 +448,11 @@ export const deleteVehicle = async (req, res) => {
     );
     await resident.save();
 
-    res.status(200).json({ message: "Vehicle deleted successfully" });
+    res.status(200).json({ message: 'Vehicle deleted successfully' });
   } catch (error) {
     res
       .status(500)
-      .json({ message: "Error deleting vehicle", error: error.message });
+      .json({ message: 'Error deleting vehicle', error: error.message });
   }
 };
 
@@ -428,20 +464,20 @@ export const addMaid = async (req, res) => {
 
     const resident = await residentModel.findById(residentId);
     if (!resident) {
-      return res.status(404).json({ message: "Resident not found" });
+      return res.status(404).json({ message: 'Resident not found' });
     }
 
     resident.maids.push(maidData);
     await resident.save();
 
     res.status(200).json({
-      message: "Maid added successfully",
+      message: 'Maid added successfully',
       maid: maidData,
     });
   } catch (error) {
     res
       .status(500)
-      .json({ message: "Error adding maid", error: error.message });
+      .json({ message: 'Error adding maid', error: error.message });
   }
 };
 
@@ -452,7 +488,7 @@ export const deleteMaid = async (req, res) => {
 
     const resident = await residentModel.findById(residentId);
     if (!resident) {
-      return res.status(404).json({ message: "Resident not found" });
+      return res.status(404).json({ message: 'Resident not found' });
     }
 
     resident.maids = resident.maids.filter(
@@ -460,11 +496,11 @@ export const deleteMaid = async (req, res) => {
     );
     await resident.save();
 
-    res.status(200).json({ message: "Maid deleted successfully" });
+    res.status(200).json({ message: 'Maid deleted successfully' });
   } catch (error) {
     res
       .status(500)
-      .json({ message: "Error deleting maid", error: error.message });
+      .json({ message: 'Error deleting maid', error: error.message });
   }
 };
 
@@ -476,20 +512,20 @@ export const addTenant = async (req, res) => {
 
     const resident = await residentModel.findById(residentId);
     if (!resident) {
-      return res.status(404).json({ message: "Resident not found" });
+      return res.status(404).json({ message: 'Resident not found' });
     }
 
     resident.tanents.push(tenantData);
     await resident.save();
 
     res.status(200).json({
-      message: "Tenant added successfully",
+      message: 'Tenant added successfully',
       tenant: tenantData,
     });
   } catch (error) {
     res
       .status(500)
-      .json({ message: "Error adding tenant", error: error.message });
+      .json({ message: 'Error adding tenant', error: error.message });
   }
 };
 
@@ -500,7 +536,7 @@ export const deleteTenant = async (req, res) => {
 
     const resident = await residentModel.findById(residentId);
     if (!resident) {
-      return res.status(404).json({ message: "Resident not found" });
+      return res.status(404).json({ message: 'Resident not found' });
     }
 
     resident.tanents = resident.tanents.filter(
@@ -508,10 +544,10 @@ export const deleteTenant = async (req, res) => {
     );
     await resident.save();
 
-    res.status(200).json({ message: "Tenant deleted successfully" });
+    res.status(200).json({ message: 'Tenant deleted successfully' });
   } catch (error) {
     res
       .status(500)
-      .json({ message: "Error deleting tenant", error: error.message });
+      .json({ message: 'Error deleting tenant', error: error.message });
   }
 };
