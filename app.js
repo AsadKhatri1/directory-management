@@ -20,7 +20,7 @@ config({ path: './config/config.env' });
 //----------------------------- middlewears ------------------------------
 app.use(
   cors({
-    origin: 'http://localhost:5173',
+    origin: '*',
     methods: ['GET', 'POST', 'DELETE', 'PUT'],
     credentials: true,
   })
