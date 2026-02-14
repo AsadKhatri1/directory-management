@@ -10,6 +10,7 @@ import expenseRouter from './routes/expense.js';
 import accRouter from './routes/acc.js';
 import incomeRouter from './routes/income.js';
 import violationRouter from './routes/violation.js';
+import complaintRouter from './routes/complaint.js';
 import './scheduler.js'; // Import the scheduler
 
 const app = express();
@@ -19,7 +20,7 @@ config({ path: './config/config.env' });
 //----------------------------- middlewears ------------------------------
 app.use(
   cors({
-    origin: '*',
+    origin: 'http://localhost:5173',
     methods: ['GET', 'POST', 'DELETE', 'PUT'],
     credentials: true,
   })
@@ -67,5 +68,6 @@ app.use('/api/v1/expense', expenseRouter);
 app.use('/api/v1/acc', accRouter);
 app.use('/api/v1/income', incomeRouter);
 app.use('/api/v1/violation', violationRouter);
+app.use('/api/v1/complaint', complaintRouter);
 
 export default app;
