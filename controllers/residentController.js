@@ -302,7 +302,7 @@ export const slipCreate = async (req, res) => {
     // Logic to generate the fee slip
     // Calculate total fee based on the fixed monthly fee and the number of months
     const numberOfMonths = req.body.numberOfMonths;
-    const monthlyFee = 1500;
+    const monthlyFee = 2500;
     const totalFee = numberOfMonths * monthlyFee;
     // Save the fee slip to the database or perform any other necessary actions
     // Return success message or fee slip data
@@ -360,7 +360,7 @@ export const deleteFamilyMember = async (req, res) => {
     }
 
     resident.relatives = resident.relatives.filter(
-      (member) => member._id.toString() !== familyMemberId
+      (member) => member._id.toString() !== familyMemberId,
     );
     await resident.save();
 
@@ -444,7 +444,7 @@ export const deleteVehicle = async (req, res) => {
     }
 
     resident.vehicles = resident.vehicles.filter(
-      (vehicle) => vehicle._id.toString() !== vehicleId
+      (vehicle) => vehicle._id.toString() !== vehicleId,
     );
     await resident.save();
 
@@ -492,7 +492,7 @@ export const deleteMaid = async (req, res) => {
     }
 
     resident.maids = resident.maids.filter(
-      (maid) => maid._id.toString() !== maidId
+      (maid) => maid._id.toString() !== maidId,
     );
     await resident.save();
 
@@ -540,7 +540,7 @@ export const deleteTenant = async (req, res) => {
     }
 
     resident.tanents = resident.tanents.filter(
-      (tenant) => tenant._id.toString() !== tenantId
+      (tenant) => tenant._id.toString() !== tenantId,
     );
     await resident.save();
 
