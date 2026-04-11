@@ -15,12 +15,12 @@ export const dbConnection = () => {
             { propertyType: "" },
           ],
         },
-        { $set: { propertyType: "house" } }
+        { $set: { propertyType: "house" } },
       );
 
       if (result.modifiedCount > 0) {
         console.log(
-          `Backfilled propertyType=house for ${result.modifiedCount} residents`
+          `Backfilled propertyType=house for ${result.modifiedCount} residents`,
         );
       }
     })

@@ -127,7 +127,7 @@ const residentSchema = mongoose.Schema(
     VerificationFile: String,
     LisenceFile: String,
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
 export const residentModel = mongoose.model("Residents", residentSchema);
