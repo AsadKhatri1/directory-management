@@ -111,6 +111,11 @@ const residentSchema = mongoose.Schema(
       type: String,
       default: "owner",
     },
+    propertyType: {
+      type: String,
+      default: "house",
+      enum: ["house", "flat", "shop"],
+    },
     relatives: [familyMemberSchema],
     vehicles: [vehicleSchema],
     maids: [maidsSchema],

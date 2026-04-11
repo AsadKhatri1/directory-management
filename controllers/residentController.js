@@ -3,6 +3,12 @@
 import { residentModel } from "../models/residentModel.js";
 import validator from "validator";
 
+const normalizePropertyType = (value) => {
+  const allowedPropertyTypes = ["house", "flat", "shop"];
+  const normalized = (value || "house").toLowerCase();
+  return allowedPropertyTypes.includes(normalized) ? normalized : "house";
+};
+
 // ------------------------------- creating resident -----------------------------------------
 export const residentController = async (req, res, next) => {
   const {
@@ -30,6 +36,7 @@ export const residentController = async (req, res, next) => {
     VerificationFile,
     LisenceFile,
     residentType,
+    propertyType,
   } = req.body;
 
   if (!FullName || !Email || !Phone || !HouseNumber || !CNIC || !Photo) {
@@ -84,6 +91,7 @@ export const residentController = async (req, res, next) => {
     VerificationFile,
     LisenceFile,
     residentType,
+    propertyType: normalizePropertyType(propertyType),
   });
 
   await newResident.save();
@@ -243,7 +251,10 @@ export const updateResident = async (req, res) => {
 //---------------------------------- updating a single resident -----------------------
 export const updateResidentData = async (req, res) => {
   try {
-    const data = req.body;
+    const data = { ...req.body };
+    if (Object.prototype.hasOwnProperty.call(data, "propertyType")) {
+      data.propertyType = normalizePropertyType(data.propertyType);
+    }
     const { id } = req.params;
 
     const resident = await residentModel.findByIdAndUpdate(id, data, {
