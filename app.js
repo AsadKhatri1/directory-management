@@ -9,6 +9,8 @@ import adminRouter from './routes/admin.js';
 import expenseRouter from './routes/expense.js';
 import accRouter from './routes/acc.js';
 import incomeRouter from './routes/income.js';
+import violationRouter from './routes/violation.js';
+import complaintRouter from './routes/complaint.js';
 import './scheduler.js'; // Import the scheduler
 
 const app = express();
@@ -65,5 +67,7 @@ app.use('/api/v1/admin', adminRouter);
 app.use('/api/v1/expense', expenseRouter);
 app.use('/api/v1/acc', accRouter);
 app.use('/api/v1/income', incomeRouter);
+app.use('/api/v1/violation', violationRouter);
+app.use('/api/v1/complaint', complaintRouter);
 
 export default app;
