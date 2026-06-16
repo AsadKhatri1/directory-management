@@ -6,9 +6,17 @@ export const updateBalance = async (req, res) => {
   try {
     const id = req.params.id;
     const { Balance } = req.body;
+
+    if (Balance === undefined || Balance === null || isNaN(Number(Balance))) {
+      return res.status(400).json({
+        success: false,
+        message: "Balance must be a valid number",
+      });
+    }
+
     const update = await accModel.findByIdAndUpdate(
       id,
-      { Balance },
+      { Balance: String(Balance) },
       { new: true }
     );
     if (update) {
@@ -17,6 +25,11 @@ export const updateBalance = async (req, res) => {
         success: true,
         message: "Balance updated",
         update,
+      });
+    } else {
+      return res.status(404).json({
+        success: false,
+        message: "Account not found",
       });
     }
   } catch (err) {
