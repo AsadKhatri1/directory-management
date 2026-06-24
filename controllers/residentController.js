@@ -1,6 +1,7 @@
 // import { residentModel } from "../models/residentModel.js";
 
 import { residentModel } from "../models/residentModel.js";
+import { receiptModel } from "../models/receiptModel.js";
 import validator from "validator";
 
 const normalizePropertyType = (value) => {
@@ -308,15 +309,46 @@ export const updateResidentData = async (req, res) => {
 export const slipCreate = async (req, res) => {
   try {
     const { residentId } = req.params;
+    const { numberOfMonths, paymentMode, months } = req.body;
+
     const resident = await residentModel.findById(residentId);
-    // const resident = await residentModel.findById(residentId);
-    // Logic to generate the fee slip
-    // Calculate total fee based on the fixed monthly fee and the number of months
-    const numberOfMonths = req.body.numberOfMonths;
+    if (!resident) {
+      return res.status(404).json({
+        success: false,
+        message: "Resident not found",
+      });
+    }
+
     const monthlyFee = 2500;
     const totalFee = numberOfMonths * monthlyFee;
-    // Save the fee slip to the database or perform any other necessary actions
-    // Return success message or fee slip data
+
+    // Update resident's payment status to paid and extend expiry date
+    resident.paid = true;
+    let startDate = new Date();
+    if (resident.paidExpiry && resident.paidExpiry > new Date()) {
+      startDate = new Date(resident.paidExpiry);
+    }
+    startDate.setMonth(startDate.getMonth() + numberOfMonths);
+    resident.paidExpiry = startDate;
+    await resident.save();
+
+    // Create unique receipt ID: REC-YYYYMMDD-XXXX
+    const dateStr = new Date().toISOString().slice(0, 10).replace(/-/g, "");
+    const randomPart = Math.floor(1000 + Math.random() * 9000);
+    const receiptId = `REC-${dateStr}-${randomPart}`;
+
+    // Create receipt document in DB
+    const newReceipt = new receiptModel({
+      receiptId,
+      residentId,
+      residentName: resident.FullName,
+      houseNumber: resident.HouseNumber,
+      amount: totalFee,
+      numberOfMonths,
+      monthsPaid: months || [],
+      paymentMode: paymentMode || "N/A",
+    });
+    await newReceipt.save();
 
     res.status(200).json({
       success: true,
@@ -324,6 +356,7 @@ export const slipCreate = async (req, res) => {
       resident,
       totalFee,
       numberOfMonths,
+      receiptId,
     });
   } catch (error) {
     console.error("Error generating fee slip:", error);
