@@ -319,8 +319,24 @@ export const slipCreate = async (req, res) => {
       });
     }
 
-    const monthlyFee = 2500;
-    const totalFee = numberOfMonths * monthlyFee;
+    const getMonthlyFee = (monthStr) => {
+      if (monthStr <= "2023-06") {
+        return 1000;
+      } else if (monthStr <= "2025-12") {
+        return 1500;
+      } else {
+        return 2500;
+      }
+    };
+
+    let totalFee = 0;
+    if (Array.isArray(months) && months.length > 0) {
+      months.forEach((m) => {
+        totalFee += getMonthlyFee(m);
+      });
+    } else {
+      totalFee = numberOfMonths * 2500;
+    }
 
     // Update resident's payment status to paid and extend expiry date
     resident.paid = true;
