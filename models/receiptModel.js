@@ -36,6 +36,17 @@ const receiptSchema = mongoose.Schema(
       type: String,
       default: "N/A",
     },
+    // Contribution = monthly dues; Membership = one-time fee
+    receiptType: {
+      type: String,
+      enum: ["Contribution", "Membership"],
+      default: "Contribution",
+    },
+    status: {
+      type: String,
+      enum: ["Paid", "Unpaid"],
+      default: "Paid",
+    },
   },
   { timestamps: true }
 );

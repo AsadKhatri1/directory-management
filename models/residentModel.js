@@ -107,6 +107,19 @@ const residentSchema = mongoose.Schema(
       type: Date,
       default: null,
     },
+    // One-time membership fee (fixed Rs 10,000)
+    membershipPaid: {
+      type: Boolean,
+      default: false,
+    },
+    membershipPaidAt: {
+      type: Date,
+      default: null,
+    },
+    membershipReceiptId: {
+      type: String,
+      default: null,
+    },
     residentType: {
       type: String,
       default: "owner",

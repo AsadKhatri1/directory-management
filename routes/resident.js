@@ -7,6 +7,7 @@ import {
   residentController,
   updateResident,
   slipCreate,
+  chargeMembership,
   updateResidentData,
   addFamilyMember,
   deleteFamilyMember,
@@ -31,6 +32,7 @@ router.delete('/deleteResident/:id', auth, deleteResident);
 router.put('/updateResident/:id', auth, updateResident);
 router.put('/updateResidentData/:id', auth, updateResidentData);
 router.post('/generateSlip/:residentId', auth, slipCreate);
+router.post('/chargeMembership/:residentId', auth, chargeMembership);
 // Family Member Routes
 router.post('/:residentId/family-members', addFamilyMember);
 router.delete(

@@ -3,6 +3,11 @@
 import { residentModel } from "../models/residentModel.js";
 import { receiptModel } from "../models/receiptModel.js";
 import validator from "validator";
+import {
+  createSplitIncomeAndCredit,
+  makeReceiptId,
+  MEMBERSHIP_FEE,
+} from "../utils/accountHelper.js";
 
 const normalizePropertyType = (value) => {
   const allowedPropertyTypes = ["house", "flat", "shop"];
@@ -338,7 +343,7 @@ export const slipCreate = async (req, res) => {
       totalFee = numberOfMonths * 2500;
     }
 
-    // Update resident's payment status to paid and extend expiry date
+    // Mark contribution as paid and extend expiry
     resident.paid = true;
     let startDate = new Date();
     if (resident.paidExpiry && resident.paidExpiry > new Date()) {
@@ -348,12 +353,8 @@ export const slipCreate = async (req, res) => {
     resident.paidExpiry = startDate;
     await resident.save();
 
-    // Create unique receipt ID: REC-YYYYMMDD-XXXX
-    const dateStr = new Date().toISOString().slice(0, 10).replace(/-/g, "");
-    const randomPart = Math.floor(1000 + Math.random() * 9000);
-    const receiptId = `REC-${dateStr}-${randomPart}`;
+    const receiptId = makeReceiptId("CON");
 
-    // Create receipt document in DB
     const newReceipt = new receiptModel({
       receiptId,
       residentId,
@@ -363,22 +364,109 @@ export const slipCreate = async (req, res) => {
       numberOfMonths,
       monthsPaid: months || [],
       paymentMode: paymentMode || "N/A",
+      receiptType: "Contribution",
+      status: "Paid",
     });
     await newReceipt.save();
 
+    // Add Contribution income (50/50 REC + Masjid) and update balances
+    const monthsLabel =
+      Array.isArray(months) && months.length > 0
+        ? months.join(", ")
+        : `${numberOfMonths} month(s)`;
+    await createSplitIncomeAndCredit({
+      resident,
+      amount: totalFee,
+      type: "Contribution",
+      reason: `Monthly contribution (${monthsLabel}) | Receipt ${receiptId}`,
+      ownership: resident.residentType,
+    });
+
     res.status(200).json({
       success: true,
-      message: "Fee slip generated successfully",
+      message: "Contribution receipt generated and income recorded",
       resident,
       totalFee,
       numberOfMonths,
       receiptId,
+      receiptType: "Contribution",
+      status: "Paid",
     });
   } catch (error) {
     console.error("Error generating fee slip:", error);
     res
       .status(500)
       .json({ success: false, message: "Failed to generate fee slip" });
+  }
+};
+
+/** One-time membership fee — fixed Rs 10,000 */
+export const chargeMembership = async (req, res) => {
+  try {
+    const { residentId } = req.params;
+    const { paymentMode } = req.body;
+
+    const resident = await residentModel.findById(residentId);
+    if (!resident) {
+      return res.status(404).json({
+        success: false,
+        message: "Resident not found",
+      });
+    }
+
+    if (resident.membershipPaid) {
+      return res.status(400).json({
+        success: false,
+        message: "Membership fee already paid for this resident",
+        membershipReceiptId: resident.membershipReceiptId,
+      });
+    }
+
+    const receiptId = makeReceiptId("MEM");
+    const amount = MEMBERSHIP_FEE;
+
+    const newReceipt = new receiptModel({
+      receiptId,
+      residentId,
+      residentName: resident.FullName,
+      houseNumber: resident.HouseNumber,
+      amount,
+      numberOfMonths: 0,
+      monthsPaid: [],
+      paymentMode: paymentMode || "Cash",
+      receiptType: "Membership",
+      status: "Paid",
+    });
+    await newReceipt.save();
+
+    await createSplitIncomeAndCredit({
+      resident,
+      amount,
+      type: "Membership",
+      reason: `One-time membership fee | Receipt ${receiptId}`,
+      ownership: resident.residentType,
+    });
+
+    resident.membershipPaid = true;
+    resident.membershipPaidAt = new Date();
+    resident.membershipReceiptId = receiptId;
+    await resident.save();
+
+    return res.status(200).json({
+      success: true,
+      message: "Membership fee charged successfully",
+      resident,
+      totalFee: amount,
+      receiptId,
+      receiptType: "Membership",
+      status: "Paid",
+    });
+  } catch (error) {
+    console.error("Error charging membership:", error);
+    return res.status(500).json({
+      success: false,
+      message: "Failed to charge membership fee",
+    });
   }
 };
 
